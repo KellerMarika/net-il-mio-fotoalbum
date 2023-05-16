@@ -212,7 +212,25 @@ namespace net_il_mio_fotoalbum.Migrations
                     b.HasIndex("PhotoId")
                         .IsUnique();
 
-                    b.ToTable("Images");
+                    b.ToTable("images");
+                });
+
+            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("messages");
                 });
 
             modelBuilder.Entity("net_il_mio_fotoalbum.Models.Photo", b =>

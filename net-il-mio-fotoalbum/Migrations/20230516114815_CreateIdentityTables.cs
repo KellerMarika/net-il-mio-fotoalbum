@@ -64,6 +64,19 @@ namespace net_il_mio_fotoalbum.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "messages",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_messages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -216,7 +229,7 @@ namespace net_il_mio_fotoalbum.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
+                name: "images",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -226,9 +239,9 @@ namespace net_il_mio_fotoalbum.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Images", x => x.id);
+                    table.PrimaryKey("PK_images", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Images_photos_photo_id",
+                        name: "FK_images_photos_photo_id",
                         column: x => x.photo_id,
                         principalTable: "photos",
                         principalColumn: "id",
@@ -280,8 +293,8 @@ namespace net_il_mio_fotoalbum.Migrations
                 column: "PhotosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_photo_id",
-                table: "Images",
+                name: "IX_images_photo_id",
+                table: "images",
                 column: "photo_id",
                 unique: true);
 
@@ -313,7 +326,10 @@ namespace net_il_mio_fotoalbum.Migrations
                 name: "CategoryPhoto");
 
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "images");
+
+            migrationBuilder.DropTable(
+                name: "messages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

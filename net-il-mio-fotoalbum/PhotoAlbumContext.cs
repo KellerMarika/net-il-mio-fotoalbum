@@ -18,6 +18,6 @@ namespace net_il_mio_fotoalbum
             public DbSet<Category>? Categories { get; set; }
             public DbSet<Photo>? Photos { get; set; }
             public DbSet<Image>? Images { get; set; }
-           // public DbSet<Message>? Messages { get; set; }
+            public DbSet<Message>? Messages { get; set; }
     }
 }
