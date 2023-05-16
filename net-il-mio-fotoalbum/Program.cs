@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using net_il_mio_fotoalbum;
+using net_il_mio_fotoalbum.Models;
+
 namespace net_il_mio_fotoalbum
 {
     public class Program
@@ -5,6 +10,17 @@ namespace net_il_mio_fotoalbum
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            /* var connectionString = builder.Configuration.GetConnectionString("PhotoAlbumContextConnection") ?? throw new InvalidOperationException("Connection string 'PhotoAlbumContextConnection' not found.");
+
+                         builder.Services.AddDbContext<PhotoAlbumContext>(options =>
+     options.UseSqlServer(connectionString));
+
+*/
+            builder.Services.AddDbContext<PhotoAlbumContext>();//++
+
+
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)//++
+                .AddEntityFrameworkStores<PhotoAlbumContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -24,13 +40,13 @@ namespace net_il_mio_fotoalbum
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthentication();//++
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            app.MapRazorPages();//++
             app.Run();
         }
     }

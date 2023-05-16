@@ -5,8 +5,7 @@ namespace net_il_mio_fotoalbum.Models
 {
     public class User : IdentityUser
     {
-      public List<Photo>? Photos { get; set; }
-
+      public List<Photo>? Photos { get; set; }            
 
         //[InverseProperty("Sender")]
         //public List<Message>? SentMessages { get; set; }
