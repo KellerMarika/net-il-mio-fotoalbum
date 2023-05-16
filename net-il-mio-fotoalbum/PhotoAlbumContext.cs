@@ -14,14 +14,10 @@ namespace net_il_mio_fotoalbum
                 optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = db_FotoAlbum; Integrated Security = True;TrustServerCertificate=True");
             }
 
-
-            //public DbSet<AspNetUsers>? Users{get;set;}
+            public DbSet<User>? Users{get;set;}
             public DbSet<Category>? Categories { get; set; }
             public DbSet<Photo>? Photos { get; set; }
             public DbSet<Image>? Images { get; set; }
-            public DbSet<Message>? Messages { get; set; }
-
-        //devo creare un model che si riferisca ad AspNetUsers?
-        
+            public DbSet<Message>? Messages { get; set; }        
     }
 }

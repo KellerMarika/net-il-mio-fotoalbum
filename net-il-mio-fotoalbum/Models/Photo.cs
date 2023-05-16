@@ -30,17 +30,18 @@ namespace net_il_mio_fotoalbum.Models
         [NotMapped] public string ImageBase64 => Image == null ? "" : "data:image/jpg;base64," + Convert.ToBase64String(Image.Data);
         public List<Category> Categories { get; set; }
 
-        //[Column("user_id")]
-        //public int UserId{get;set;}
-        //public AspNetUsers User{get;set;}
+        [Column("user_id")]
+        public string UserId { get; set; }
+        public User User { get; set; }
 
         public Photo() { }
-        public Photo( string title, string description, bool visible, int? imgeId)
+        public Photo( string title, string description, bool visible, int? imgeId, string? userId)
         {
             Title = title;
             Description = description;
             Visible = visible;
             ImgeId = imgeId;
+            UserId = userId;
         }
     }
 }

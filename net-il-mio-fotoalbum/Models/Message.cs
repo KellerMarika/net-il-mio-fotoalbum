@@ -13,26 +13,33 @@ namespace net_il_mio_fotoalbum.Models
         [Column("text")]
         private string Text { get; set; }
 
-        /* [Column("email")]
-         [Required]
-         private string Email { get; set; }*/
 
-        //[Column("receiver_id")]
-        //public int ReceiverId { get; set; }
-        //public AspNetUsers Receiver { get; set; }
+        private string email;
 
-        //[Column("sender_id")]
-        //public int SenderId { get; set; }
-        //public AspNetUsers Sender { get; set; }
+        [Column("email")]
+        private string Email
+        {
+            get => email;
+
+            set => email = Sender.Email;
+        }   
+
+        [Column("receiver_id")]
+        public string ReceiverId { get; set; }
+        public User Receiver { get; set; }
+
+        [Column("sender_id")]
+        public string SenderId { get; set; }
+        public User Sender { get; set; }
 
         public Message() { }
         public Message(string text) {  Text = text; }
-        //public Message(int id, string text, int receiverId, int senderId)
-        //{
-        //    Id = id;
-        //    Text = text;
-        //    ReceiverId = receiverId;
-        //    SenderId = senderId;  
-        //}
+        public Message(int id, string text, string receiverId, string senderId)
+        {
+            Id = id;
+            Text = text;
+            ReceiverId = receiverId;
+            SenderId = senderId;
+        }
     }
 }
