@@ -15,13 +15,13 @@ namespace net_il_mio_fotoalbum.Models
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;*/
 
         [Column("text")]
-        private string Text { get; set; }
+        public string Text { get; set; }
 
         [Column("email")]
-        private string Email { get; set; }
+        public string Email { get; set; }
 
 
         public Message() { }
-        public Message(string text) {  Text = text; }
+        public Message(string text, string email) {  Text = text; Email = email; }
     }
 }
