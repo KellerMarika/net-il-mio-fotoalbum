@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using net_il_mio_fotoalbum;
 
@@ -11,9 +12,11 @@ using net_il_mio_fotoalbum;
 namespace net_il_mio_fotoalbum.Migrations
 {
     [DbContext(typeof(PhotoAlbumContext))]
-    partial class PhotoAlbumContextModelSnapshot : ModelSnapshot
+    [Migration("20230516160700_CreateIdentityTables")]
+    partial class CreateIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,11 +224,6 @@ namespace net_il_mio_fotoalbum.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("img");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("title");
 
                     b.Property<bool>("Visible")
                         .HasColumnType("bit")

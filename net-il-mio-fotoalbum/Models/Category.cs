@@ -12,7 +12,7 @@ namespace net_il_mio_fotoalbum.Models
         [Column("name")]
         public string Name { get; set; }
 
-        public List<Photo> Photos { get; set; }
+        public List<Photo>? Photos { get; set; }
 
         public Category() { }
         public Category(string name) => this.Name = name;

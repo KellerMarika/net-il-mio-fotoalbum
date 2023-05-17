@@ -10,16 +10,12 @@ namespace net_il_mio_fotoalbum
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            /* var connectionString = builder.Configuration.GetConnectionString("PhotoAlbumContextConnection") ?? throw new InvalidOperationException("Connection string 'PhotoAlbumContextConnection' not found.");
 
-                         builder.Services.AddDbContext<PhotoAlbumContext>(options =>
-     options.UseSqlServer(connectionString));
-
-*/
             builder.Services.AddDbContext<PhotoAlbumContext>();//++
 
 
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)//++
+                .AddRoles<IdentityRole>()//++
                 .AddEntityFrameworkStores<PhotoAlbumContext>();
 
             // Add services to the container.

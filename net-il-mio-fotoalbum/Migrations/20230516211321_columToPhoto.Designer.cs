@@ -12,8 +12,8 @@ using net_il_mio_fotoalbum;
 namespace net_il_mio_fotoalbum.Migrations
 {
     [DbContext(typeof(PhotoAlbumContext))]
-    [Migration("20230516114815_CreateIdentityTables")]
-    partial class CreateIdentityTables
+    [Migration("20230516211321_columToPhoto")]
+    partial class columToPhoto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,32 +192,6 @@ namespace net_il_mio_fotoalbum.Migrations
                     b.ToTable("categories");
                 });
 
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("Data")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnName("data");
-
-                    b.Property<int>("PhotoId")
-                        .HasColumnType("int")
-                        .HasColumnName("photo_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PhotoId")
-                        .IsUnique();
-
-                    b.ToTable("images");
-                });
-
             modelBuilder.Entity("net_il_mio_fotoalbum.Models.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -226,10 +200,6 @@ namespace net_il_mio_fotoalbum.Migrations
                         .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
 
                     b.HasKey("Id");
 
@@ -250,22 +220,21 @@ namespace net_il_mio_fotoalbum.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("description");
 
-                    b.Property<int?>("ImgeId")
-                        .HasColumnType("int")
-                        .HasColumnName("image_id");
-
-                    b.Property<string>("UserId")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("user_id");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("img");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("title");
 
                     b.Property<bool>("Visible")
                         .HasColumnType("bit")
-                        .HasColumnName("visible");
+                        .HasColumnName("is_visible");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("photos");
                 });
@@ -399,38 +368,6 @@ namespace net_il_mio_fotoalbum.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Image", b =>
-                {
-                    b.HasOne("net_il_mio_fotoalbum.Models.Photo", "Photo")
-                        .WithOne("Image")
-                        .HasForeignKey("net_il_mio_fotoalbum.Models.Image", "PhotoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Photo");
-                });
-
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Photo", b =>
-                {
-                    b.HasOne("net_il_mio_fotoalbum.Models.User", "User")
-                        .WithMany("Photos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Photo", b =>
-                {
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.User", b =>
-                {
-                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Photo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@User.Identity.Name
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categories)
+            </th>
+        
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var item in Model) {//qua devo chiedere cacchio
+        <tr>
+            <td>
+                <img class="img-fluid" style="width:100px" src="~/img/@Html.DisplayFor(modelItem => item.Image)" alt="@Html.DisplayFor(modelItem => item.Title)">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visible)
+            </td>
+                <td>
+                    @foreach (var category in item.Categories)
+                    {
+                        <span class="px-1">@category.Name</span>
+                    }
+                </td>
+            
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <span>|</span>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    }
+                    </td>
+        </tr>
+}
+    </tbody>
+</table>

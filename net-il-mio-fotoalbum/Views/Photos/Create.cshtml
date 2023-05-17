@@ -1,0 +1,74 @@
+﻿@model PhotoFormModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Photo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* title*@
+            <div class="form-group">
+                <label asp-for="Photo.Title" class="control-label"></label>
+                <input asp-for="Photo.Title" class="form-control" />
+                <span asp-validation-for="Photo.Title" class="text-danger"></span>
+            </div>
+
+
+           @* desc*@
+            <div class="form-group">
+                <label asp-for="Photo.Description" class="control-label"></label>
+                <input asp-for="Photo.Description" class="form-control" />
+                <span asp-validation-for="Photo.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Photo.Visible" /> @Html.DisplayNameFor(m => m.Photo.Visible)
+                </label>
+            </div>
+
+            @*img*@
+            <div class="form-group col">
+                <div class="mb-3">
+                    <label for="img">Image</label>
+                    <input asp-for="Photo.Image" type="file" id="img" class="form-control" placeholder="Enter photo's Image" />
+                    <span asp-validation-for="Photo.Image" class="text-danger"></span>
+                </div>
+            </div>
+
+            @*categories*@
+            <div class="mb-3 row row-cols-6">
+                @foreach (var cat in Model.Categories)
+                {
+                    <div class="form-check  px-4 col">
+                        @*questa cosa fa schifo--- pretendo un if ternario!*@
+
+                        <input type="checkbox" id="@($"chk{cat.Value}")" name="SelectedCategories" value="@cat.Value" class="form-check-input" @(cat.Selected ? "checked" : "")>
+
+
+                        <label class="form-check-label" for="@($"chk{cat.Value}")">@cat.Text</label>
+                    </div>
+                }
+                <span asp-validation-for="Categories" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

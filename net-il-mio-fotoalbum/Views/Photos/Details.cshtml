@@ -1,0 +1,60 @@
+﻿@model net_il_mio_fotoalbum.Models.Photo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Photo</h4>
+    <hr />
+    <dl class="row">
+        <div class="col-6">
+            <img class="img-fluid" style="width:600px" src="~/img/@Html.DisplayFor(modelItem => modelItem.Image)" alt="@Html.DisplayFor(modelItem => modelItem.Title)">
+        </div>
+        <div class="col-6">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Visible)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Visible)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Categories)
+            </dt>
+            <dd class="col-sm-10">
+                @foreach (var category in Model.Categories)
+                {
+                    <span class="px-1">@category.Name</span>
+                }
+            </dd>
+        </div>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a> | 
+
+    @if (User.IsInRole("ADMIN"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> <span>|</span>
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="@Model.Id" />
+            <input type="submit" value="Delete" class="link-primary text-decoration-underline bg-transparent border-0" /> 
+        </form>
+     }
+</div>

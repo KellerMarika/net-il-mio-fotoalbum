@@ -12,36 +12,29 @@ namespace net_il_mio_fotoalbum.Models
 
         [Column("title")]
         [Required]
-        private string Title { get; set; }
+        public string Title { get; set; }
 
         [Column("description")]
         [Required]      
         public string Description { get; set; }
 
-        [Column("visible")]
+        [Column("is_visible")]
         public bool Visible { get; set; }=false;
 
-        [NotMapped] public IFormFile? ImgFormFile { get; set; }
+        [Column("img")]
+        public string Image { get; set; }
 
-        //relations
-        [Column("image_id")]
-        public int? ImgeId { get; set; }
-        public Image? Image { get; set; }
-        [NotMapped] public string ImageBase64 => Image == null ? "" : "data:image/jpg;base64," + Convert.ToBase64String(Image.Data);
-        public List<Category> Categories { get; set; }
-
-        [Column("user_id")]
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public List<Category>? Categories { get; set; } = new List<Category>();
 
         public Photo() { }
-        public Photo( string title, string description, bool visible, int? imgeId, string? userId)
+        public Photo( string title, string description, bool visible, string? image)
         {
             Title = title;
             Description = description;
             Visible = visible;
-            ImgeId = imgeId;
-            UserId = userId;
+            Image = image;
+            Categories = new List<Category>();
+
         }
     }
 }
