@@ -52,6 +52,7 @@
     @if (User.IsInRole("ADMIN"))
     {
         <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> <span>|</span>
+
         <form asp-action="Delete" class="d-inline">
             <input type="hidden" asp-for="@Model.Id" />
             <input type="submit" value="Delete" class="link-primary text-decoration-underline bg-transparent border-0" /> 

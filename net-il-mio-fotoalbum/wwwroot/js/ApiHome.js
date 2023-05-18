@@ -2,14 +2,13 @@
 
 function GetPhotos(queryText) {
     let photoTable = document.getElementById("photos-table");
-    photoTable.innerHTML = "";//svuoto
-    axios.get('/api/Photo',{
+    photoTable.innerHTML = ""; //svuoto
+    axios.get('/api/Photo', {
         params: {
             queryText: queryText
         }
     }).then((resp) => {
         let photosList = resp.data;
-     
 
         for (let i = 0; i < photosList.length; i++) {
             let photo = photosList[i];
@@ -60,10 +59,10 @@ function SendMex() {
     };
 
     axios.post('/api/Photo', data)
-        .then(function (resp) {
+        .then((resp) => {
             console.log(resp);
         })
-        .catch(error) {
+        .catch((error) => {
             console.log(error);
         });
 }

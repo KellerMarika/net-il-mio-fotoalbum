@@ -26,20 +26,20 @@ namespace net_il_mio_fotoalbum.Controllers.API
             photosList = _context.Photos.Where(p => p.Visible == true).ToList();
             if (queryText != null)
             {
-                photosList=photosList.Where(p=>p.Title.ToLower().Contains(queryText.ToLower()))
+                photosList = photosList.Where(p => p.Title.ToLower().Contains(queryText.ToLower()))
                  .ToList();
             }
-            return Ok(photosList); 
+            return Ok(photosList);
         }
 
         //CREA messaggio
         [HttpPost]
         public IActionResult SendMessage([FromBody] Message data)      // gestisce richieste POST /api/Photo
         {
-            Message newMex = new Message(data.Text, data.Email);
-            _context.Messages.Add(newMex);
+            //Message newMex = new Message(data.Text, data.Email);
+            _context.Messages.Add(new Message(data.Text, data.Email));
             _context.SaveChanges();
-            return Ok();
+            return RedirectToAction("Index");
         }
     }
 }

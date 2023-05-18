@@ -23,11 +23,17 @@ namespace net_il_mio_fotoalbum.Controllers
         }
 
         // GET: Photos
-        public async Task <IActionResult> Index()
+        public IActionResult Index()
         {
-              return _context.Photos != null ? 
-                          View(await _context.Photos.Include(p=>p.Categories).ToListAsync()) :
-                          Problem("Entity set 'PhotoAlbumContext.Photos'  is null.");
+            if (_context.Photos != null)
+            {
+                var photoList = _context.Photos
+                          .Include(p => p.Categories)
+                          .ToList();
+                return View(photoList);
+            }
+            else
+                return Problem("Entity Photos is null");
         }
 
         // GET: Photos/Details/5
@@ -95,7 +101,7 @@ namespace net_il_mio_fotoalbum.Controllers
                 }
                 _context.Photos.Add(newPhoto);
                 _context.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
         }
 
@@ -190,8 +196,8 @@ namespace net_il_mio_fotoalbum.Controllers
             if (photoToDelete != null)
             {
                 _context.Photos.Remove(photoToDelete);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

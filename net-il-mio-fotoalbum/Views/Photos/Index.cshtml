@@ -62,6 +62,10 @@
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
                     }
                     </td>
+                <form asp-action="Delete" asp-controller="Photos" asp-route-id="@item.Id" class="d-inline">
+                    <input type="hidden" />
+                    <input type="submit" value="Delete" class="link-primary text-decoration-underline bg-transparent border-0" />
+                </form>
         </tr>
 }
     </tbody>
